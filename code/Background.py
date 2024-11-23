@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from code.Const import WINDOW_WIDTH, ENTITY_SPEED
+from code.Const import WIN_WIDTH, ENTITY_SPEED
 from code.Entity import Entity
 
 
@@ -11,5 +11,5 @@ class Background(Entity):
     def move(self, ):
         self.rect.centerx -= ENTITY_SPEED[self.name]
         if self.rect.right <= 0:
-            self.rect.left = WINDOW_WIDTH
+            self.rect.left = WIN_WIDTH
 
