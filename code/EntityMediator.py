@@ -63,10 +63,15 @@ class EntityMediator:
             for j in range(i + 1, len(entity_list)):
                 entity2 = entity_list[j]
                 EntityMediator.__verify_collision_entity(entity1, entity2)
+                #Log para verificar se a colisão está acontecendo
+                print(f"[DEBUG] Checking collision betwen {entity1.name} and {entity2.name}.")
 
     @staticmethod
     def verify_health(entity_list: list[Entity]):
         for ent in entity_list:
-            if isinstance(ent, Enemy):
-                EntityMediator.__give_score(ent, entity_list)
-                entity_list.remove(ent)
+                if ent.health <= 0:
+                    if isinstance(ent, Enemy):
+                        EntityMediator.__give_score(ent, entity_list)
+                    entity_list.remove(ent)
+                    print(f"[DEBUG] Removing {ent.name} from entity_list due to health = 0")  # Log de remoçã
+
