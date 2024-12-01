@@ -25,6 +25,7 @@ class EntityFactory:
                     list_bg.append(Background(f'Level2Bg{i}', (0, 0)))
                     list_bg.append(Background(f'Level2Bg{i}', (WIN_WIDTH, 0)))
                 return list_bg
+
             case 'Player1':
                 return Player('Player1', (10, WIN_HEIGHT / 2 - 50))
             case 'Player2':
@@ -37,4 +38,12 @@ class EntityFactory:
                 enemy = Enemy('Enemy2', (WIN_WIDTH + 10, random.randint(40, WIN_HEIGHT - 40)))
                 return enemy
 
+            case 'Level3Bg':
+                list_bg = []
+                for i in range(5):  # Level images number
+                    list_bg.append(Background(f'Level3Bg{i}', (0, 0)))
+                    list_bg.append(Background(f'Level3Bg{i}', (WIN_WIDTH, 0)))
+                    enemy = Enemy('Enemy3', (WIN_WIDTH + 10, random.randint(40, WIN_HEIGHT - 40)))
+                    return enemy
+                return list_bg
                 #return Enemy('Enemy2', (WIN_WIDTH + 10, random.randint(40, WIN_HEIGHT - 40)))

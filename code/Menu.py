@@ -15,6 +15,14 @@ class Menu:
         self.surf = pygame.image.load('./asset/MenuBg.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)
 
+        self.alunos = [
+            {"ru": "4411784", "name": "Jackson"},
+            {"ru": "1234", "name": "Ilka"},
+            {"ru": "1234", "name": "Gabriel"},
+            {"ru": "1234", "name": "Voltaire"},
+         ]
+
+
     def run(self):
         menu_option = 0
         pygame.mixer_music.load('./asset/Menu.mp3')
@@ -25,12 +33,18 @@ class Menu:
             self.menu_text(50,"Mountain", C_ORANGE, (WIN_WIDTH / 2, 70))
             self.menu_text(50, "Shooter", C_ORANGE, (WIN_WIDTH / 2, 120))
 
+            # View menu options
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
                     self.menu_text(20, MENU_OPTION[i], C_YELLOW, (WIN_WIDTH / 2, 200 + 25 * i))
                 else:
                     self.menu_text(20, MENU_OPTION[i], C_WHITE, (WIN_WIDTH / 2, 200 + 25 * i))
-                pygame.display.flip()
+            y_pos = 10
+            for aluno in self.alunos:
+                self.menu_text(12, f"{aluno['name']}-RU: {aluno['ru']}", C_YELLOW,
+                               (WIN_WIDTH - 15, y_pos),align="right")
+                y_pos += 20
+            pygame.display.flip()
 
            ## Check for all events
             for event in pygame.event.get():
@@ -56,9 +70,15 @@ class Menu:
 
 
 
-    def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
+    def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple, align="center"):
         text_font: Font = pygame.font.SysFont(name='Lucida Sans Typewriter', size=text_size)
         text_surface: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surface.get_rect(center=text_center_pos)
+        
+        
+        if align == "right":
+            text_rect.topright = text_center_pos
+        else:
+            text_rect.center = text_center_pos
         self.window.blit(source=text_surface, dest=text_rect)
 
